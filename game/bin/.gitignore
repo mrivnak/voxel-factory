@@ -1,0 +1,8 @@
+# Linux shared object
+*.so
+
+# Windows dynamic link library
+*.dll
+*.lib
+*.pdb
+*.exp
