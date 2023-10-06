@@ -12,6 +12,10 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+# Generate godot api definition
+execute_process(COMMAND godot --dump-extension-api extension_api.json WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+set(GODOT_CUSTOM_API_FILE ${CMAKE_CURRENT_SOURCE_DIR}/extension_api.json)
+
 # Fetch and include godot-cpp library
 include(FetchContent)
 FetchContent_Declare(
@@ -19,7 +23,14 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/godotengine/godot-cpp.git
     GIT_TAG        4.1
 )
-FetchContent_MakeAvailable(godot-cpp)
+FetchContent_GetProperties(godot-cpp)
+
+if (NOT godot-cpp_POPULATED)
+  FetchContent_Populate(godot-cpp)
+  
+  # Configure and build godot-cpp as part of your project
+  add_subdirectory(${godot-cpp_SOURCE_DIR} ${godot-cpp_BINARY_DIR})
+endif()
 
 # Enable optimiations for godot-cpp in debug mode
 if (CMAKE_BUILD_TYPE MATCHES "Debug" AND CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")

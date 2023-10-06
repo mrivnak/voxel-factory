@@ -1,0 +1,11 @@
+[configuration]
+
+entry_symbol = "gdvoxel_init"
+compatibility_minimum = 4.1
+
+[libraries]
+
+windows.debug.x86_64 = "res://bin/gdvoxel.Windows.Debug.AMD64.dll"
+windows.release.x86_64 = "res://bin/gdvoxel.Windows.Release.AMD64.dll"
+linux.debug.x86_64 = "res://bin/libgdvoxel.Linux.Debug.x86_64.so"
+linux.release.x86_64 = "res://bin/libgdvoxel.Linux.Release.x86_64.so"

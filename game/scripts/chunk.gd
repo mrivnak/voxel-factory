@@ -4,11 +4,7 @@ extends Node3D
 func _ready():
 	for i in range(20):
 		for j in range(20):
-			var block = MeshInstance3D.new()
-			block.position = Vector3(i, 1, j)
-			block.mesh = BoxMesh.new()
-			add_child(block)
-			print("added block")
+			pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
