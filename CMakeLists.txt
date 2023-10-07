@@ -12,8 +12,21 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+# Get godot executable name
+find_program(GODOT_EXECUTABLE NAMES godot godot4 godot_4)
+if(NOT GODOT_EXECUTABLE)
+    message(FATAL_ERROR "Godot executable not found. Please make sure it's installed and in your PATH.")
+endif()
+
 # Generate godot api definition
-execute_process(COMMAND godot --dump-extension-api extension_api.json WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+execute_process(COMMAND ${GODOT_EXECUTABLE} --dump-extension-api extension_api.json
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    RESULT_VARIABLE GODOT_API_RESULT
+    )
+if (NOT GODOT_API_RESULT EQUAL 0)
+    message(FATAL_ERROR "Failed to generate godot api definition")
+endif()
+
 set(GODOT_CUSTOM_API_FILE ${CMAKE_CURRENT_SOURCE_DIR}/extension_api.json)
 
 # Fetch and include godot-cpp library
