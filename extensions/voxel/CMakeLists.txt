@@ -3,7 +3,8 @@ project(gdvoxel)
 set(CMAKE_CXX_STANDARD 20)
 
 set(SOURCES
-    src/gdvoxel.cpp
+    src/chunk.cpp
+    src/world.cpp
     src/register_types.cpp
 )
 

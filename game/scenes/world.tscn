@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct27qhfi7gcu2"]
+[gd_scene load_steps=5 format=3 uid="uid://ct27qhfi7gcu2"]
 
-[ext_resource type="Script" path="res://scripts/chunk.gd" id="1_26n8x"]
 [ext_resource type="PackedScene" uid="uid://dhkuq36263drx" path="res://scenes/player.tscn" id="2_neuts"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqrax"]
@@ -10,16 +9,15 @@ size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_klouc"]
 
-[node name="World" type="Node3D"]
+[node name="Environment" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999829, 0.0151679, -0.0106266, -0.000680813, 0.603508, 0.797357, 0.0185075, -0.797213, 0.603415, 0, 4.28421, 0)
 
-[node name="Chunk" type="Node3D" parent="."]
-script = ExtResource("1_26n8x")
-
 [node name="Player" parent="." instance=ExtResource("2_neuts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00707579, 2.09288, -0.0178375)
+
+[node name="World" type="World" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_aqrax")
@@ -30,5 +28,3 @@ shape = SubResource("BoxShape3D_rbksn")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("BoxMesh_klouc")
-
-[node name="Chunk2" type="Chunk" parent="."]
