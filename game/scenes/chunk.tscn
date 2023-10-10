@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://fo0m5ee1o5kd"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dcmgv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tncpx"]
 
 [node name="Chunk" type="Chunk"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_dcmgv")
+mesh = SubResource("ArrayMesh_tncpx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

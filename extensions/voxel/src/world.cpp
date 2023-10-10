@@ -1,11 +1,11 @@
 #include "world.hpp"
 #include "chunk.hpp"
 
-#include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/translation.hpp>
-#include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/core/class_db.hpp>
+
 
 using namespace godot;
 
@@ -24,7 +24,6 @@ World::~World()
 
 void World::_ready()
 {
-    UtilityFunctions::print("World::_ready()");
     spawn_chunks(Vector3i(1, 1, 1), Vector3i(16, 16, 16));
 }
 
@@ -34,8 +33,6 @@ void World::_process(double delta)
 
 void World::spawn_chunks(Vector3i worldSize, Vector3i chunkSize)
 {
-    UtilityFunctions::print("World::spawn_chunks()");
-
     // Clear existing chunks
     for (int i = 0; i < get_child_count(); i++)
     {
@@ -65,13 +62,10 @@ void World::spawn_chunks(Vector3i worldSize, Vector3i chunkSize)
             }
         }
     }
-
-    UtilityFunctions::print("World::spawn_chunks() done");
 }
 
 void World::set_block(Vector3i position, int block)
 {
-    UtilityFunctions::print("World::set_block()");
     for (int i = 0; i < get_child_count(); i++)
     {
         Node *child = get_child(i);

@@ -1,4 +1,5 @@
 build/
 .vscode/
+.cache/
 .envrc
 extension_api.json

@@ -5,24 +5,24 @@
 
 namespace godot
 {
-    class World : public Node3D
-    {
-        GDCLASS(World, Node3D)
+class World : public Node3D
+{
+    GDCLASS(World, Node3D)
 
-    public:
-        World();
-        ~World();
+  public:
+    World();
+    ~World();
 
-        void _ready() override;
-        void _process(double delta) override;
+    void _ready() override;
+    void _process(double delta) override;
 
-    protected:
-        static void _bind_methods();
+  protected:
+    static void _bind_methods();
 
-    private:
-        Ref<PackedScene> chunk_scene;
+  private:
+    Ref<PackedScene> chunk_scene;
 
-        void spawn_chunks(Vector3i worldSize, Vector3i chunkSize);
-        void set_block(Vector3i position, int block); // TODO: use enum for block type
-    };
-}
+    void spawn_chunks(Vector3i worldSize, Vector3i chunkSize);
+    void set_block(Vector3i position, int block); // TODO: use enum for block type
+};
+} // namespace godot
