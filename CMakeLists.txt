@@ -39,10 +39,10 @@ FetchContent_Declare(
 FetchContent_GetProperties(godot-cpp)
 
 if (NOT godot-cpp_POPULATED)
-  FetchContent_Populate(godot-cpp)
-  
-  # Configure and build godot-cpp as part of your project
-  add_subdirectory(${godot-cpp_SOURCE_DIR} ${godot-cpp_BINARY_DIR})
+    FetchContent_Populate(godot-cpp)
+    
+    # Configure and build godot-cpp as part of your project
+    add_subdirectory(${godot-cpp_SOURCE_DIR} ${godot-cpp_BINARY_DIR})
 endif()
 
 # Enable optimiations for godot-cpp in debug mode
@@ -52,6 +52,36 @@ endif()
 
 # Add voxelfactory library
 add_subdirectory("lib/voxelfactory")
+
+# Make Catch2 available to the project
+if (WIN32)
+    # Download Catch2 manually on Windows
+    FetchContent_Declare(
+        Catch2
+        URL https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.tar.gz
+        DOWNLOAD_EXTRACT_TIMESTAMP ON
+    )
+
+    if (NOT Catch2_POPULATED)
+        FetchContent_Populate(Catch2)
+        add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
+    endif()
+else()
+    # Use system package on Unix
+    find_package(Catch2 3 REQUIRED)
+endif()
+
+# Add tests executable
+add_executable(tests
+    lib/tests/src/test.cpp
+)
+
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain voxelfactory)
+
+# Add tests to CTest
+include(Catch)
+include(CTest)
+catch_discover_tests(tests)
 
 # Set extension output directory
 set(GODOT_EXT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/game/bin")

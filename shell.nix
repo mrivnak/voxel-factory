@@ -5,6 +5,7 @@ pkgs.llvmPackages_16.stdenv.mkDerivation {
   buildInputs = with pkgs; [
     catch2_3
     clang_16
+    clang-tools_16
     cmake
     godot_4
     ninja
